@@ -4,6 +4,5 @@ enum class PaymentMethod {
     BOLETO,
     PIX,
     CARTAO,
-    VALE,
-    TRADEMASTER
+    VALE
 }
