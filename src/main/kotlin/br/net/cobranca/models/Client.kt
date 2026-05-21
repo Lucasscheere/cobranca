@@ -20,15 +20,11 @@ data class Client(
     @NotBlank
     @Column(unique = true, nullable = false)
     val cnpj: String,
+    
+    val razaoSocial: String = "",
 
-    @NotBlank
-    @Column(nullable = false)
-    val razaoSocial: String,
+    val nomeFantasia: String? = "",
 
-    @Column(name = "nome_fantasia")
-    val nomeFantasia: String? = null,
-
-    @Column(nullable = false)
     val active: Boolean = true,
 
     val createdAt: LocalDate = LocalDate.now(),

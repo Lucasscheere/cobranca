@@ -24,7 +24,7 @@ data class Account(
     val client: Client,
 
     @Enumerated(EnumType.STRING)
-    val paymentMethod: PaymentMethod,
+    val paymentMethod: PaymentMethod = PaymentMethod.DINHEIRO,
 
     val issueDate: LocalDate = LocalDate.now(),
 
@@ -34,8 +34,8 @@ data class Account(
 
     val valuePayment: BigDecimal = BigDecimal.ZERO,
 
-    val statusPayment: StatusPayment,
+    val statusPayment: StatusPayment = StatusPayment.VINCENDO,
 
-    val notes: String
+    val notes: String = ""
 
 )

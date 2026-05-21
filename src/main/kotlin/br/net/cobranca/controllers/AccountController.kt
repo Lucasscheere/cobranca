@@ -3,6 +3,7 @@ package br.net.cobranca.controllers
 import br.net.cobranca.models.Account
 import br.net.cobranca.services.AccountService
 import io.swagger.v3.oas.annotations.parameters.RequestBody
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -25,7 +26,7 @@ class AccountController(private val service: AccountService) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody account: Account) = service.create(account)
+    fun create(@Valid @RequestBody account: Account) = service.create(account)
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
