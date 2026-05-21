@@ -34,6 +34,7 @@ data class Account(
 
     val valuePayment: BigDecimal = BigDecimal.ZERO,
 
+    @Enumerated(EnumType.STRING)
     val statusPayment: StatusPayment = StatusPayment.VINCENDO,
 
     val notes: String = ""
