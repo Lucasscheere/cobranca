@@ -1,7 +1,5 @@
-package br.net.cobranca.services
+package br.net.cobranca.interaction
 
-import br.net.cobranca.models.Interaction
-import br.net.cobranca.repositories.InteractionRepository
 import org.springframework.stereotype.Service
 
 @Service

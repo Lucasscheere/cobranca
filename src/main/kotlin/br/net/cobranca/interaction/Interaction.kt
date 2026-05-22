@@ -1,5 +1,7 @@
-package br.net.cobranca.models
+package br.net.cobranca.interaction
 
+import br.net.cobranca.client.Client
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -13,6 +15,7 @@ data class Interaction(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     val idClient: Client,
@@ -23,18 +26,5 @@ data class Interaction(
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
-) {
+    ) {
 }
-
-/*
-id
-
-id Cliente
-
-type
-
-result
-
-Agent
-
- */

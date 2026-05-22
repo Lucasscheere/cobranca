@@ -1,5 +1,4 @@
-package br.net.cobranca.models
-
+package br.net.cobranca.client
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -20,7 +19,7 @@ data class Client(
     @NotBlank
     @Column(unique = true, nullable = false)
     val cnpj: String,
-    
+
     val razaoSocial: String = "",
 
     val nomeFantasia: String? = "",

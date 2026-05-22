@@ -1,7 +1,5 @@
-package br.net.cobranca.services
+package br.net.cobranca.client
 
-import br.net.cobranca.models.Client
-import br.net.cobranca.repositories.ClientRepository
 import org.springframework.stereotype.Service
 
 @Service

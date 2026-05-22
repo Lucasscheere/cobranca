@@ -1,7 +1,6 @@
-package br.net.cobranca.models
+package br.net.cobranca.account
 
-import br.net.cobranca.enums.PaymentMethod
-import br.net.cobranca.enums.StatusPayment
+import br.net.cobranca.client.Client
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated

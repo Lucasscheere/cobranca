@@ -1,4 +1,4 @@
-package br.net.cobranca.enums
+package br.net.cobranca.account
 
 enum class PaymentMethod {
     DINHEIRO,

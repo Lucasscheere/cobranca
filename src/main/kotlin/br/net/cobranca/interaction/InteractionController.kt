@@ -1,8 +1,5 @@
-package br.net.cobranca.controllers
+package br.net.cobranca.interaction
 
-import br.net.cobranca.models.Client
-import br.net.cobranca.services.ClientService
-import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,9 +11,8 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/clients")
-class ClientController(private val service: ClientService) {
-
+@RequestMapping("/interactions")
+class InteractionController(private val service: InteractionService) {
     @GetMapping
     fun getAll() = service.getAll()
 
@@ -25,11 +21,9 @@ class ClientController(private val service: ClientService) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@Valid @RequestBody client: Client): Client {
-        return service.create(client)
-    }
+    fun create(@RequestBody interaction: Interaction): Interaction = service.create(interaction)
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(@PathVariable "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun delete(@PathVariable id: Long) = service.delete(id)
+    fun delete(id: Long) = service.delete(id)
 }

@@ -1,7 +1,5 @@
-package br.net.cobranca.services
+package br.net.cobranca.account
 
-import br.net.cobranca.models.Account
-import br.net.cobranca.repositories.AccountRepository
 import org.springframework.stereotype.Service
 
 @Service
