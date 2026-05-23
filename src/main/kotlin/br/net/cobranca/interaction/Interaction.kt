@@ -13,9 +13,8 @@ import java.time.LocalDateTime
 @Entity
 data class Interaction(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long,
+    var id: Long? = null,
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     val idClient: Client,

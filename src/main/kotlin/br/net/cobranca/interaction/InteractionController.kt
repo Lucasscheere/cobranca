@@ -1,5 +1,7 @@
 package br.net.cobranca.interaction
 
+import br.net.cobranca.interaction.dto.InteractionRequestDTO
+import br.net.cobranca.interaction.dto.InteractionResponseDTO
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,16 +16,16 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/interactions")
 class InteractionController(private val service: InteractionService) {
     @GetMapping
-    fun getAll() = service.getAll()
+    fun getAll(): List<InteractionResponseDTO> = service.getAll()
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: Long) = service.getById(id)
+    fun getById(@PathVariable id: Long):  InteractionResponseDTO = service.getById(id)
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody interaction: Interaction): Interaction = service.create(interaction)
+    fun create(@RequestBody dto: InteractionRequestDTO): InteractionResponseDTO = service.create(dto)
 
-    @DeleteMapping(@PathVariable "/{id}")
+    @DeleteMapping( "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun delete(id: Long) = service.delete(id)
+    fun delete(@PathVariable id: Long) = service.delete(id)
 }

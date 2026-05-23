@@ -1,17 +1,46 @@
 package br.net.cobranca.interaction
 
+import br.net.cobranca.client.ClientRepository
+import br.net.cobranca.interaction.dto.InteractionRequestDTO
+import br.net.cobranca.interaction.dto.InteractionResponseDTO
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
-class InteractionService(private val repo: InteractionRepository) {
-    fun getAll(): List<Interaction> = repo.findAll()
+class InteractionService(
+    private val repo: InteractionRepository,
+    val clientRepo: ClientRepository
+) {
+    fun getAll(): List<InteractionResponseDTO> = repo.findAll().map { it.toResponseDTO() }
 
-    fun getById(id: Long): Interaction = repo.findById(id).orElseThrow{NoSuchElementException("Atendimento não encontrado")}
+    fun getById(id: Long): InteractionResponseDTO =
+        repo.findById(id)
+            .orElseThrow { NoSuchElementException("Atendimento não encontrado") }
+            .toResponseDTO()
 
-    fun create(interaction: Interaction): Interaction = repo.save(interaction)
+    fun create(dto: InteractionRequestDTO): InteractionResponseDTO {
+        val client = clientRepo.findById(dto.clientId)
+            .orElseThrow { NoSuchElementException("Cliente não encontrado") }
 
-    fun delete(id: Long){
+        val interaction = Interaction(
+            idClient = client,
+            notes = dto.notes,
+            nextContact = dto.nextContact,
+            createdAt = LocalDateTime.now()
+        )
+
+        return repo.save(interaction).toResponseDTO()
+    }
+
+    fun delete(id: Long) {
         getById(id)
         repo.deleteById(id)
     }
+    private fun Interaction.toResponseDTO() = InteractionResponseDTO(
+        id = this.id!!,
+        clientId = this.idClient.id!!,
+        notes = this.notes,
+        nextContact = this.nextContact,
+        createdAt = this.createdAt
+    )
 }
