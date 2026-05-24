@@ -238,6 +238,6 @@ interaction
 
 ## 👤 Autor
 
-**Lucas Scheere Rodrigues da Silva**
-Analista de Crédito | Desenvolvedor em formação
+**Lucas Scheere Rodrigues da Silva**  
+Analista de Crédito | Desenvolvedor em formação  
 [LinkedIn](https://www.linkedin.com/in/lucas-scheere/) · [GitHub](https://github.com/Lucasscheere)
