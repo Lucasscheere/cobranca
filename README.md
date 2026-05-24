@@ -226,7 +226,7 @@ interaction
 ## 🔜 Próximas melhorias
 
 - [ ] Tratamento global de exceções (`GlobalExceptionHandler`)
-- [ ] Validações nos DTOs de entrada (`@NotNull`, `@Positive`, `@Future`)
+- [x] Validações nos DTOs de entrada (`@NotNull`, `@Positive`, `@Future`)
 - [ ] Endpoints de atualização (`PUT`/`PATCH`) para contas e interações
 - [ ] DTOs para a entidade `Client`
 - [ ] Paginação nos endpoints de listagem

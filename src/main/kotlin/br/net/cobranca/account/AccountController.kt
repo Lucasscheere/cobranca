@@ -1,5 +1,7 @@
 package br.net.cobranca.account
 
+import br.net.cobranca.account.dto.AccountRequestDTO
+import br.net.cobranca.account.dto.AccountResponseDTO
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -16,17 +18,16 @@ import org.springframework.web.bind.annotation.RestController
 class AccountController(private val service: AccountService) {
 
     @GetMapping
-    fun getAll() = service.getAll()
+    fun getAll(): List<AccountResponseDTO> = service.getAll()
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: Long) = service.getById(id)
+    fun getById(@PathVariable id: Long): AccountResponseDTO = service.getById(id)
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@Valid @RequestBody account: Account) = service.create(account)
+    fun create(@Valid @RequestBody dto: AccountRequestDTO): AccountResponseDTO = service.create(dto)
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Long) = service.delete(id)
-
 }

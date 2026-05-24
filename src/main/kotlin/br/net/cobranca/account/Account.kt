@@ -29,12 +29,12 @@ data class Account(
 
     val paymentDate: LocalDate? = null,
 
-    val dueDate: LocalDate? = null,
+    val dueDate: LocalDate,
 
     val valuePayment: BigDecimal = BigDecimal.ZERO,
 
     @Enumerated(EnumType.STRING)
-    val statusPayment: StatusPayment = StatusPayment.VINCENDO,
+    val statusPayment: StatusPayment,
 
     val notes: String = ""
 

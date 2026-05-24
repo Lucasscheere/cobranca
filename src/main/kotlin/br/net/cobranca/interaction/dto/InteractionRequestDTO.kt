@@ -1,10 +1,11 @@
 package br.net.cobranca.interaction.dto
 
+import jakarta.validation.constraints.Future
+import jakarta.validation.constraints.NotNull
 import java.time.LocalDateTime
 
 data class InteractionRequestDTO(
-    val clientId: Long,
+    @field:NotNull val clientId: Long,
     val notes: String = "",
-    val nextContact: LocalDateTime = LocalDateTime.now()
-) {
-}
+    @field:Future val nextContact: LocalDateTime
+)
