@@ -81,6 +81,9 @@ src/main/kotlin/br/net/cobranca/
 │   ├── PaymentMethod.kt
 │   └── StatusPayment.kt
 ├── client/
+├── dto/
+│   │   ├── ClientRequestDTO.kt
+│   │   └── ClientResponseDTO.kt
 │   ├── Client.kt
 │   ├── ClientController.kt
 │   ├── ClientRepository.kt
@@ -228,7 +231,7 @@ interaction
 - [ ] Tratamento global de exceções (`GlobalExceptionHandler`)
 - [x] Validações nos DTOs de entrada (`@NotNull`, `@Positive`, `@Future`)
 - [ ] Endpoints de atualização (`PUT`/`PATCH`) para contas e interações
-- [ ] DTOs para a entidade `Client`
+- [x] DTOs para a entidade `Client`
 - [ ] Paginação nos endpoints de listagem
 - [ ] Autenticação e autorização com Spring Security + JWT
 - [ ] Testes unitários e de integração

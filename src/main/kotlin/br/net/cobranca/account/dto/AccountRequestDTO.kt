@@ -14,6 +14,5 @@ data class AccountRequestDTO(
     val paymentDate: LocalDate? = null,
     @field:NotNull(message = "A data de vencimento é obrigatória") val dueDate: LocalDate,
     @field:Positive val valuePayment: BigDecimal,
-    @field:NotNull(message = "O status do pagameto é obrigatório") val statusPayment: StatusPayment,
     val notes: String = ""
 )

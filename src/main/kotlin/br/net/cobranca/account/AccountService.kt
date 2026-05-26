@@ -35,7 +35,6 @@ class AccountService(
             paymentDate = dto.paymentDate,
             dueDate = dto.dueDate,
             valuePayment = dto.valuePayment,
-            statusPayment = dto.statusPayment,
             notes = dto.notes
         )
 
@@ -55,7 +54,6 @@ class AccountService(
         paymentDate = this.paymentDate,
         dueDate = this.dueDate,
         valuePayment = this.valuePayment,
-        statusPayment = this.statusPayment,
         notes = this.notes
     )
 }
