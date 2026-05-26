@@ -1,5 +1,7 @@
 package br.net.cobranca.client
 
+import br.net.cobranca.client.dto.ClientRequestDTO
+import br.net.cobranca.client.dto.ClientResponseDTO
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -16,16 +18,15 @@ import org.springframework.web.bind.annotation.RestController
 class ClientController(private val service: ClientService) {
 
     @GetMapping
-    fun getAll() = service.getAll()
+    fun getAll(): List<ClientResponseDTO> = service.getAll()
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: Long) = service.getById(id)
+    fun getById(@PathVariable id: Long): ClientResponseDTO = service.getById(id)
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@Valid @RequestBody client: Client): Client {
-        return service.create(client)
-    }
+    fun create(@Valid @RequestBody dto: ClientRequestDTO): ClientResponseDTO =
+        service.create(dto)
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

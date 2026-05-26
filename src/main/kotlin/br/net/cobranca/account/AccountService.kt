@@ -4,6 +4,7 @@ import br.net.cobranca.account.dto.AccountRequestDTO
 import br.net.cobranca.account.dto.AccountResponseDTO
 import br.net.cobranca.client.ClientRepository
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class AccountService(
@@ -27,6 +28,11 @@ class AccountService(
             "A data de vencimento não pode ser anterior à data de emissão"
         }
 
+        val status = when {
+            dto.paymentDate != null -> StatusPayment.PAGO
+            LocalDate.now().isAfter(dto.dueDate) -> StatusPayment.ATRASADO
+            else -> StatusPayment.VINCENDO
+        }
 
         val account = Account(
             client = client,
@@ -35,6 +41,7 @@ class AccountService(
             paymentDate = dto.paymentDate,
             dueDate = dto.dueDate,
             valuePayment = dto.valuePayment,
+            statusPayment = status,
             notes = dto.notes
         )
 
@@ -54,6 +61,7 @@ class AccountService(
         paymentDate = this.paymentDate,
         dueDate = this.dueDate,
         valuePayment = this.valuePayment,
+        statusPayment = this.statusPayment,
         notes = this.notes
     )
 }

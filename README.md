@@ -81,7 +81,7 @@ src/main/kotlin/br/net/cobranca/
 │   ├── PaymentMethod.kt
 │   └── StatusPayment.kt
 ├── client/
-├── dto/
+├── ├── dto/
 │   │   ├── ClientRequestDTO.kt
 │   │   └── ClientResponseDTO.kt
 │   ├── Client.kt
