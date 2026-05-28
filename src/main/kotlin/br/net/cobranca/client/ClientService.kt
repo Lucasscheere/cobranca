@@ -2,6 +2,7 @@ package br.net.cobranca.client
 
 import br.net.cobranca.client.dto.ClientRequestDTO
 import br.net.cobranca.client.dto.ClientResponseDTO
+import br.net.cobranca.exception.ResourceNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
@@ -12,7 +13,7 @@ class ClientService(private val repo: ClientRepository) {
 
     fun getById(id: Long): ClientResponseDTO =
         repo.findById(id)
-            .orElseThrow { NoSuchElementException("Cliente não encontrado") }
+            .orElseThrow { ResourceNotFoundException("Cliente", id) }
             .toResponseDTO()
 
     fun create(dto: ClientRequestDTO): ClientResponseDTO {

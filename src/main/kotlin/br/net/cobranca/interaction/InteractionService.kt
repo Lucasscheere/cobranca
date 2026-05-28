@@ -1,6 +1,8 @@
 package br.net.cobranca.interaction
 
 import br.net.cobranca.client.ClientRepository
+import br.net.cobranca.exception.BusinessException
+import br.net.cobranca.exception.ResourceNotFoundException
 import br.net.cobranca.interaction.dto.InteractionRequestDTO
 import br.net.cobranca.interaction.dto.InteractionResponseDTO
 import org.springframework.stereotype.Service
@@ -15,12 +17,12 @@ class InteractionService(
 
     fun getById(id: Long): InteractionResponseDTO =
         repo.findById(id)
-            .orElseThrow { NoSuchElementException("Atendimento não encontrado") }
+            .orElseThrow { ResourceNotFoundException("Atendimento", id) }
             .toResponseDTO()
 
     fun create(dto: InteractionRequestDTO): InteractionResponseDTO {
         val client = clientRepo.findById(dto.clientId)
-            .orElseThrow { NoSuchElementException("Cliente não encontrado") }
+            .orElseThrow { BusinessException("Não é possível cadatrar débito de cliente inexistente") }
 
         val interaction = Interaction(
             idClient = client,

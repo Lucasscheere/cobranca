@@ -261,16 +261,15 @@ interaction
 
 ## 🔜 Próximas melhorias
 
-- [ ] Tratamento global de exceções (`GlobalExceptionHandler`)
+- [x] Tratamento global de exceções (`GlobalExceptionHandler`)
 - [x] Validações nos DTOs de entrada (`@NotNull`, `@Positive`, `@Future`, `@CNPJ`)
 - [x] DTOs de request e response para todos os módulos (`Client`, `Account`, `Interaction`)
 - [x] Status de pagamento calculado automaticamente pelo servidor (sem entrada do cliente)
 - [x] Credenciais externalizadas via variáveis de ambiente
 - [ ] Endpoints de atualização (`PUT`/`PATCH`) para contas e interações
-- [ ] Paginação nos endpoints de listagem
 - [ ] Autenticação e autorização com Spring Security + JWT
 - [ ] Testes unitários e de integração
-- [ ] Containerização com Docker e Docker Compose
+- [x] Containerização com Docker e Docker Compose
 
 ---
 

@@ -3,6 +3,8 @@ package br.net.cobranca.account
 import br.net.cobranca.account.dto.AccountRequestDTO
 import br.net.cobranca.account.dto.AccountResponseDTO
 import jakarta.validation.Valid
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
