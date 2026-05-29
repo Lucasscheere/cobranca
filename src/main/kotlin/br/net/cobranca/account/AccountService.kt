@@ -26,8 +26,8 @@ class AccountService(
         val client = clientRepo.findById(dto.clientId)
             .orElseThrow { BusinessException("Não é possível cadatrar débito de cliente inexistente")}
 
-        require(!dto.dueDate.isBefore(dto.issueDate)) {
-            "A data de vencimento não pode ser anterior à data de emissão"
+        if (dto.dueDate.isBefore(dto.issueDate)) {
+            throw BusinessException("A data de vencimento não pode ser anterior à data de emissão")
         }
 
         val status = when {

@@ -112,8 +112,12 @@ src/main/kotlin/br/net/cobranca/
 │   ├── InteractionController.kt
 │   ├── InteractionRepository.kt
 │   └── InteractionService.kt
+├── exception/
+│   ├── BillingException.kt
+│   ├── ErrorResponse
+│   ├── GlobalExceptionHandler
 └── CobrancaApplication.kt
-
+│
 src/main/resources/
 ├── db/migration/
 │   ├── V1__create_clients.sql
