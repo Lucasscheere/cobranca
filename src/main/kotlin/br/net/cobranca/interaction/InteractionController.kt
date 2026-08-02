@@ -2,6 +2,7 @@ package br.net.cobranca.interaction
 
 import br.net.cobranca.interaction.dto.InteractionRequestDTO
 import br.net.cobranca.interaction.dto.InteractionResponseDTO
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -23,7 +24,7 @@ class InteractionController(private val service: InteractionService) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody dto: InteractionRequestDTO): InteractionResponseDTO = service.create(dto)
+    fun create(@Valid @RequestBody dto: InteractionRequestDTO): InteractionResponseDTO = service.create(dto)
 
     @DeleteMapping( "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

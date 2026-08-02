@@ -24,7 +24,7 @@ class AccountService(
 
     fun create(dto: AccountRequestDTO): AccountResponseDTO {
         val client = clientRepo.findById(dto.clientId)
-            .orElseThrow { BusinessException("Não é possível cadatrar débito de cliente inexistente")}
+            .orElseThrow { BusinessException("Não é possível cadastrar débito de cliente inexistente")}
 
         if (dto.dueDate.isBefore(dto.issueDate)) {
             throw BusinessException("A data de vencimento não pode ser anterior à data de emissão")

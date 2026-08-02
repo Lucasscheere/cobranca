@@ -22,7 +22,7 @@ class InteractionService(
 
     fun create(dto: InteractionRequestDTO): InteractionResponseDTO {
         val client = clientRepo.findById(dto.clientId)
-            .orElseThrow { BusinessException("Não é possível cadatrar débito de cliente inexistente") }
+            .orElseThrow { BusinessException("Não é possível criar atendimento de cliente fora da base de dados") }
 
         val interaction = Interaction(
             idClient = client,
