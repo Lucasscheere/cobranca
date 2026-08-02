@@ -11,11 +11,11 @@ class UserService(
 ) {
     fun getAll(): List<User> = repo.findAll()
 
-    fun getById(@PathVariable id: Long): User = repo.findById(id).orElseThrow{ResourceNotFoundException("Usuário", id)}
+    fun getById(id: Long): User = repo.findById(id).orElseThrow{ResourceNotFoundException("Usuário", id)}
 
-    fun create(@RequestBody user: User): User = repo.save(user)
+    fun create(user: User): User = repo.save(user)
 
-    fun delete(@PathVariable id: Long){
+    fun delete(id: Long){
         getById(id)
         repo.deleteById(id)
     }

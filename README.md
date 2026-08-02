@@ -14,6 +14,7 @@ API REST para gestão de cobrança empresarial, desenvolvida em Kotlin com Sprin
 | PostgreSQL | — |
 | Flyway | — |
 | SpringDoc OpenAPI (Swagger) | 3.0.2 |
+| Docker / Docker Compose | — |
 
 ---
 
@@ -80,6 +81,23 @@ A aplicação estará disponível em `http://localhost:8080`.
 
 A documentação interativa (Swagger UI) estará em `http://localhost:8080/swagger-ui.html`.
 
+### 🐳 Executando com Docker
+
+Como alternativa, a aplicação e o PostgreSQL podem ser levantados juntos via Docker Compose, sem necessidade de instalar Java ou o banco localmente:
+
+```bash
+docker compose up --build
+```
+
+Isso sobe dois serviços:
+
+| Serviço | Descrição |
+|---|---|
+| `db` | PostgreSQL 16, com volume persistente `pgdata` |
+| `api` | Build da aplicação a partir do `Dockerfile` (multi-stage: build com JDK 21, runtime com JRE 21) |
+
+A API estará disponível em `http://localhost:8080`, com as variáveis de conexão ao banco (`DB_URL`, `DB_USERNAME`, `DB_PASSWORD`) já configuradas para apontar para o serviço `db` dentro da rede do Compose.
+
 ---
 
 ## 🗂️ Estrutura do projeto
@@ -112,18 +130,27 @@ src/main/kotlin/br/net/cobranca/
 │   ├── InteractionController.kt
 │   ├── InteractionRepository.kt
 │   └── InteractionService.kt
+├── user/
+│   ├── User.kt
+│   ├── UserController.kt
+│   ├── UserRepository.kt
+│   └── UserService.kt
 ├── exception/
 │   ├── BillingException.kt
-│   ├── ErrorResponse
-│   ├── GlobalExceptionHandler
+│   ├── ErrorResponse.kt
+│   ├── GlobalExceptionHandler.kt
 └── CobrancaApplication.kt
 │
 src/main/resources/
 ├── db/migration/
 │   ├── V1__create_clients.sql
 │   ├── V2__create_accounts.sql
-│   └── V3__create_interactions.sql
+│   ├── V3__create_interactions.sql
+│   └── V4__create_users.sql
 └── application.properties
+
+Dockerfile
+docker-compose.yml
 ```
 
 ---
@@ -231,6 +258,31 @@ src/main/resources/
 
 ---
 
+### Usuários — `/users`
+
+| Método | Rota | Descrição |
+|---|---|---|
+| GET | `/users` | Lista todos os usuários |
+| GET | `/users/{id}` | Busca usuário por ID |
+| POST | `/users` | Cadastra novo usuário |
+| DELETE | `/users/{id}` | Remove usuário |
+
+O campo `role` identifica o tipo de usuário no domínio (ex.: `COLLECTOR`, o valor padrão definido na migration). A modelagem com dois papéis — cobrador e administrador — está prevista, mas ainda não há distinção de permissões por rota.
+
+> ⚠️ Diferente dos módulos `Client`, `Account` e `Interaction`, o módulo `User` ainda expõe a entidade `User` diretamente no controller, sem DTOs de request/response nem validação de entrada (`@Valid`). Alinhar esse módulo ao padrão dos demais é um dos próximos passos.
+
+**Exemplo de requisição (POST):**
+```json
+{
+  "name": "Maria Souza",
+  "email": "maria.souza@empresa.com",
+  "role": "COLLECTOR",
+  "active": true
+}
+```
+
+---
+
 ## 🗃️ Modelo de dados
 
 ```
@@ -259,6 +311,14 @@ interaction
 ├── notes
 ├── next_contact
 └── created_at
+
+app_user
+├── id (PK)
+├── name
+├── email (unique)
+├── role (default: COLLECTOR)
+├── active (default: true)
+└── created_at
 ```
 
 ---
@@ -274,6 +334,8 @@ interaction
 - [ ] Autenticação e autorização com Spring Security + JWT
 - [ ] Testes unitários e de integração
 - [x] Containerização com Docker e Docker Compose
+- [x] Entidade de usuário (`User`) com papéis cobrador/administrador
+- [ ] DTOs de request/response e validação para o módulo `User`, alinhando-o ao padrão dos demais módulos
 
 ---
 
