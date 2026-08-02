@@ -2,6 +2,7 @@ package br.net.cobranca.client
 
 import br.net.cobranca.client.dto.ClientRequestDTO
 import br.net.cobranca.client.dto.ClientResponseDTO
+import br.net.cobranca.exception.DuplicateResourceException
 import br.net.cobranca.exception.ResourceNotFoundException
 import org.springframework.stereotype.Service
 
@@ -17,6 +18,10 @@ class ClientService(private val repo: ClientRepository) {
             .toResponseDTO()
 
     fun create(dto: ClientRequestDTO): ClientResponseDTO {
+        if (repo.existsByCnpj(dto.cnpj)) {
+            throw DuplicateResourceException("Cliente", "cnpj")
+        }
+
         val client = Client(
             cnpj = dto.cnpj,
             razaoSocial = dto.razaoSocial,
